@@ -1,0 +1,16 @@
+set t to (current date)
+
+set outputpath to "/Users/byronhe/Documents/evernote-backup/evernote-export-" & t & ".enex"
+
+tell application "Evernote"
+	
+	synchronize
+	
+	set allmynotes to find notes
+	
+	export allmynotes to outputpath format ENEX
+	
+end tell
+
+set p to POSIX path of outputpath
+do shell script "/usr/bin/bzip2 " & quoted form of p
